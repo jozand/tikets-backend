@@ -11,6 +11,7 @@ app.use(express.json());
 import authRoutes from './routes/auth.routes.js';
 app.use('/api/auth', authRoutes);
 
-// Agrega más rutas según tus recursos
+import eventoRoutes from './routes/evento.routes.js';
+app.use('/api/eventos', eventoRoutes);
 
 export default app;

@@ -103,6 +103,7 @@ export const login = async (req, res) => {
         nombre: usuario.nombre,
         correo: usuario.correo,
         rol: usuario.Rol.nombre,
+        rolId: usuario.rolId,
         verificado: usuario.verificado
       }
     });
