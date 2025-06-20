@@ -5,7 +5,7 @@ import { initSocketEvents } from './src/sockets/index.js';
 
 // Conexión Sequelize y modelo
 import sequelize from './src/config/db.config.js';
-import Usuario from './src/models/Usuario.js';
+import './src/models/index.js';
 
 const server = http.createServer(app);
 const io = new Server(server, {
