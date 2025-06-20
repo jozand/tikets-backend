@@ -89,3 +89,17 @@ export const eliminarAsiento = async (req, res) => {
     res.status(500).json({ mensaje: 'Error al eliminar asiento' });
   }
 };
+
+export const comprarAsiento = async (req, res) => {
+  const { asientoEventoId, usuarioId } = req.body;
+
+  const asiento = await AsientoEvento.findByPk(asientoEventoId);
+  if (!asiento || asiento.usuarioId) {
+    return res.status(400).json({ mensaje: 'Asiento no disponible' });
+  }
+
+  asiento.usuarioId = usuarioId;
+  await asiento.save();
+
+  res.json({ mensaje: 'Compra exitosa', asiento });
+};
