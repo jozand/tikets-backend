@@ -22,7 +22,10 @@ const AsientoEvento = sequelize.define('AsientoEvento', {
   usuarioId: {
     type: DataTypes.INTEGER,
     allowNull: true,
-    defaultValue: null
+    references: {
+      model: 'usuarios', // nombre de tabla real en MySQL
+      key: 'usuarioId'
+    }
   }
 }, {
   tableName: 'asientos_evento',
