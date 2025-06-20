@@ -41,8 +41,4 @@ const Usuario = sequelize.define('Usuario', {
   tableName: 'usuarios'
 });
 
-// Relación
-Usuario.belongsTo(Rol, { foreignKey: 'rolId' });
-Rol.hasMany(Usuario, { foreignKey: 'rolId' });
-
 export default Usuario;
