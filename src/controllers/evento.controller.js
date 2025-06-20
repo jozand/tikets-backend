@@ -1,4 +1,5 @@
 import Evento from '../models/Evento.js';
+import AsientoEvento from '../models/AsientoEvento.js';
 import { Op } from 'sequelize';
 
 // Obtener todos los eventos
@@ -110,4 +111,24 @@ export const cambiarVisibilidad = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: 'Error al cambiar visibilidad', error: error.message });
   }
+};
+
+export const obtenerEventosVisibles = async (req, res) => {
+  const eventos = await Evento.findAll({
+    where: { visible: true },
+    include: [{ model: AsientoEvento }]
+  });
+
+  const eventosConTotales = eventos.map(ev => {
+    const total = ev.AsientoEventos.length;
+    const disponibles = ev.AsientoEventos.filter(a => a.usuarioId === null).length;
+
+    return {
+      ...ev.toJSON(),
+      totalAsientos: total,
+      disponibles
+    };
+  });
+
+  res.json(eventosConTotales);
 };
